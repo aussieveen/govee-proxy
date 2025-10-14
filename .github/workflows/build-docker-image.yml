@@ -21,7 +21,6 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker tag goveeproxy:$DATE_TIME ${{ secrets.DOCKER_USERNAME }}/goveeproxy:$DATE_TIME
-          docker push ${{ secrets.DOCKER_USERNAME }}/goveeproxy:$DATE_TIME
-          docker tag goveeproxy:$DATE_TIME ${{ secrets.DOCKER_USERNAME }}/goveeproxy:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/goveeproxy:latest
+          docker push ghcr.io/${{ github.repository_owner }}/cookbook:$DATE_TIME
+          docker tag goveeproxy:$DATE_TIME ghcr.io/${{ github.repository_owner }}/goveeproxy:latest
+          docker push ghcr.io/${{ github.repository_owner }}/goveeproxy:latest
