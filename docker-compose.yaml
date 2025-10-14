@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  app:
+    image: govee-proxy-app:local
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile.dev
+    environment:
+      OPCACHE_VALIDATE_TIMESTAMPS: 1
+    volumes:
+      - ./app:/var/www/html:rw,cached
+  nginx:
+    container_name: govee-proxy-nginx
+    image: nginx:stable-alpine
+    ports:
+      - '${APP_PORT}:80'
+    volumes:
+      - ./app/public:/var/www/html/public
+      - ./docker/nginx/conf.d/default.dev.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
