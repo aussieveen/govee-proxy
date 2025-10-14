@@ -28,7 +28,7 @@ jobs:
         run: docker build -t ghcr.io/${{ github.repository_owner }}/goveeproxy:$DATE_TIME -f docker/php/Dockerfile.prod . --platform=linux/amd64
 
       - name: Push Docker Image
-        run:
+        run: |
           docker push ghcr.io/${{ github.repository_owner }}/goveeproxy:$DATE_TIME
           docker tag ghcr.io/${{ github.repository_owner }}/goveeproxy:$DATE_TIME ghcr.io/${{ github.repository_owner }}/goveeproxy:latest
           docker push ghcr.io/${{ github.repository_owner }}/goveeproxy:latest
